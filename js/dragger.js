@@ -92,7 +92,7 @@ Dragger.prototype.dragStart = function( event, pointer ) {
     window.addEventListener( moveEvent, this );
     window.addEventListener( upEvent, this );
   }
-  this.onDragStart( pointer );
+  this.onDragStart( pointer, event );
 };
 
 Dragger.prototype.ontouchmove = function( event ) {
@@ -109,16 +109,16 @@ Dragger.prototype.dragMove = function( event, pointer ) {
   event.preventDefault();
   var moveX = pointer.pageX - this.dragStartX;
   var moveY = pointer.pageY - this.dragStartY;
-  this.onDragMove( pointer, moveX, moveY );
+  this.onDragMove( pointer, moveX, moveY, event);
 };
 
 Dragger.prototype.onmouseup =
 Dragger.prototype.onpointerup =
 Dragger.prototype.ontouchend =
-Dragger.prototype.dragEnd = function( /* event */) {
+Dragger.prototype.dragEnd = function( event ) {
   window.removeEventListener( moveEvent, this );
   window.removeEventListener( upEvent, this );
-  this.onDragEnd();
+  this.onDragEnd(event);
 };
 
 return Dragger;
