@@ -61,7 +61,8 @@ Hemisphere.prototype.renderDome = function( ctx, renderer ) {
     var startAngle = contourAngle + TAU/4;
     var endAngle = contourAngle - TAU/4;
     ctx.beginPath();
-    ctx.arc( x, y, domeRadius, startAngle, endAngle );
+    this.path2D = new Path2D();
+    this.path2D.arc( x, y, domeRadius, startAngle, endAngle );
   } else if ( renderer.isSvg ) {
     // svg
     contourAngle = ( contourAngle - TAU/4 ) / TAU * 360;
@@ -71,8 +72,8 @@ Hemisphere.prototype.renderDome = function( ctx, renderer ) {
         'translate(' + x + ',' + y + ' ) rotate(' + contourAngle + ')' );
   }
 
-  renderer.stroke( ctx, elem, this.stroke, this.color, this.getLineWidth() );
-  renderer.fill( ctx, elem, this.fill, this.color );
+  renderer.stroke( ctx, elem, this.stroke, this.color, this.getLineWidth(), this.path2D);
+  renderer.fill( ctx, elem, this.fill, this.color, this.path2D );
   renderer.end( ctx, elem );
 };
 

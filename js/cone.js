@@ -102,9 +102,9 @@ Cone.prototype.renderConeSurface = function( ctx, renderer ) {
 
   // render
   var elem = this.getSurfaceRenderElement( ctx, renderer );
-  renderer.renderPath( ctx, elem, this.surfacePathCommands );
-  renderer.stroke( ctx, elem, this.stroke, this.color, this.getLineWidth() );
-  renderer.fill( ctx, elem, this.fill, this.color );
+  this.path2d = renderer.renderPath( ctx, elem, this.surfacePathCommands );
+  renderer.stroke( ctx, elem, this.stroke, this.color, this.getLineWidth(), this.path2d );
+  renderer.fill( ctx, elem, this.fill, this.color, this.path2d );
   renderer.end( ctx, elem );
 };
 

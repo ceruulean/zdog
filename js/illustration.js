@@ -161,6 +161,8 @@ Illustration.prototype.prerenderCanvas = function() {
   }
   var scale = this.pixelRatio * this.zoom;
   ctx.scale( scale, scale );
+  var u = ctx.getTransform();
+  this.transformMatrix = [u.a, u.b, u.c, u.d, u.e, u.f]
   this.onPrerender( ctx );
 };
 
