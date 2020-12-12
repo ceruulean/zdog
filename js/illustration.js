@@ -118,27 +118,6 @@ Illustration.prototype.updateRenderGraph = function( item ) {
 
 // ----- canvas ----- //
 
-/**
- * https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setTransform
- */
-Illustration.prototype.setTransform = function(matrix) {
-  var scale
-  var translation
-  var rotation = this.rotate
-  if (typeof matrix == 'object'){
-    scale = {x:matrix.a, y:matrix.d}
-    translation = {x:matrix.e, y:matrix.f}
-  } else if (matrix.length > 0){
-    scale = {x:matrix[0], y:matrix[4]}
-    translation = {x:matrix[2], y:matrix[5]}
-  }
-  this.renderOrigin.transform( translation, rotation, scale );
-  // transform children
-  this.children.forEach( function( child ) {
-    child.transform( translation, rotation, scale );
-  } );
-};
-
 Illustration.prototype.setCanvas = function( element ) {
   this.element = element;
   this.isCanvas = true;

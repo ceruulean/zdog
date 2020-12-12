@@ -20,7 +20,7 @@ var Ellipse = Shape.subclass({
   width: undefined,
   height: undefined,
   quarters: 4,
-  closed: true,
+  closed: false,
 });
 
 Ellipse.prototype.setPath = function() {
