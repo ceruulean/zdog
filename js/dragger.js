@@ -92,7 +92,7 @@ Dragger.prototype.dragStart = function( event, pointer ) {
     window.addEventListener( moveEvent, this );
     window.addEventListener( upEvent, this );
   }
-  this.onDragStart( pointer, event );
+  this.onDragStart( event, pointer );
 };
 
 Dragger.prototype.ontouchmove = function( event ) {
@@ -109,7 +109,7 @@ Dragger.prototype.dragMove = function( event, pointer ) {
   event.preventDefault();
   var moveX = pointer.pageX - this.dragStartX;
   var moveY = pointer.pageY - this.dragStartY;
-  this.onDragMove( pointer, moveX, moveY, event);
+  this.onDragMove( event, pointer, moveX, moveY );
 };
 
 Dragger.prototype.onmouseup =
