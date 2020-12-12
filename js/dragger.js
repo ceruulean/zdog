@@ -36,6 +36,8 @@ if ( hasWindow ) {
   }
 }
 
+var Element;
+
 function noop() {}
 
 function Dragger( options ) {
@@ -58,6 +60,7 @@ Dragger.prototype.bindDrag = function( element ) {
   // disable browser gestures #53
   element.style.touchAction = 'none';
   element.addEventListener( downEvent, this );
+  Element = element
 };
 
 Dragger.prototype.getQueryElement = function( element ) {
@@ -120,6 +123,12 @@ Dragger.prototype.dragEnd = function( event ) {
   window.removeEventListener( upEvent, this );
   this.onDragEnd(event);
 };
+
+Dragger.prototype.destroy = function(){
+  window.removeEventListener( moveEvent, this );
+  window.removeEventListener( upEvent, this );
+  Element.removeEventListener( downEvent, this );
+}
 
 return Dragger;
 
