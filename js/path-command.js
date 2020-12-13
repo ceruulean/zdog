@@ -54,28 +54,28 @@ PathCommand.prototype.transform = function( translation, rotation, scale ) {
   } );
 };
 
-PathCommand.prototype.render = function( ctx, elem, renderer, Path2D ) {
-  return this[ this.method ]( ctx, elem, renderer, Path2D );
+PathCommand.prototype.render = function( ctx, elem, renderer ) {
+  return this[ this.method ]( ctx, elem, renderer  );
 };
 
-PathCommand.prototype.move = function( ctx, elem, renderer, Path2D ) {
-  return renderer.move( ctx, elem, this.renderPoints[0], Path2D );
+PathCommand.prototype.move = function( ctx, elem, renderer ) {
+  return renderer.move( ctx, elem, this.renderPoints[0] );
 };
 
-PathCommand.prototype.line = function( ctx, elem, renderer, Path2D ) {
-  return renderer.line( ctx, elem, this.renderPoints[0], Path2D );
+PathCommand.prototype.line = function( ctx, elem, renderer ) {
+  return renderer.line( ctx, elem, this.renderPoints[0] );
 };
 
-PathCommand.prototype.bezier = function( ctx, elem, renderer, Path2D ) {
+PathCommand.prototype.bezier = function( ctx, elem, renderer ) {
   var cp0 = this.renderPoints[0];
   var cp1 = this.renderPoints[1];
   var end = this.renderPoints[2];
-  return renderer.bezier( ctx, elem, cp0, cp1, end, Path2D );
+  return renderer.bezier( ctx, elem, cp0, cp1, end );
 };
 
 var arcHandleLength = 9/16;
 
-PathCommand.prototype.arc = function( ctx, elem, renderer, Path2D) {
+PathCommand.prototype.arc = function( ctx, elem, renderer ) {
   var prev = this.previousPoint;
   var corner = this.renderPoints[0];
   var end = this.renderPoints[1];
@@ -83,7 +83,7 @@ PathCommand.prototype.arc = function( ctx, elem, renderer, Path2D) {
   var cp1 = this.controlPoints[1];
   cp0.set( prev ).lerp( corner, arcHandleLength );
   cp1.set( end ).lerp( corner, arcHandleLength );
-  return renderer.bezier( ctx, elem, cp0, cp1, end, Path2D);
+  return renderer.bezier( ctx, elem, cp0, cp1, end );
 };
 
 return PathCommand;

@@ -190,9 +190,9 @@ Shape.prototype.renderPath = function( ctx, renderer ) {
   var isClosed = !isTwoPoints && this.closed;
   var color = this.getRenderColor();
 
-  this.path2d = renderer.renderPath( ctx, elem, this.pathCommands, isClosed );
-  renderer.stroke( ctx, elem, this.stroke, color, this.getLineWidth(), this.path2d);
-  renderer.fill( ctx, elem, this.fill, color, this.path2d);
+  renderer.renderPath( ctx, elem, this.pathCommands, isClosed );
+  renderer.stroke( ctx, elem, this.stroke, color, this.getLineWidth() );
+  renderer.fill( ctx, elem, this.fill, color );
   renderer.end( ctx, elem );
 };
 

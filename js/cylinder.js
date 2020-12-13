@@ -56,8 +56,8 @@ CylinderGroup.prototype.renderCylinderSurface = function( ctx, renderer ) {
   if ( renderer.isCanvas ) {
     ctx.lineCap = 'butt'; // nice
   }
-  this.path2d = renderer.renderPath( ctx, elem, this.pathCommands );
-  renderer.stroke( ctx, elem, true, this.color, strokeWidth, this.path2d );
+  renderer.renderPath( ctx, elem, this.pathCommands );
+  renderer.stroke( ctx, elem, true, this.color, strokeWidth );
   renderer.end( ctx, elem );
 
   if ( renderer.isCanvas ) {
