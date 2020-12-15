@@ -21,7 +21,8 @@ var Axis = Anchor.subclass({
   color: 'hsl(0, 100%, 50%)',
   visible: true,
   t:1,
-  front:{x:1}
+  front:{x:1},
+  scaleZoom:false
 });
 
 Axis.prototype.create = function( options ) {
@@ -43,8 +44,7 @@ Axis.prototype.create = function( options ) {
       break
   }
 
-  this.setCommands()
-  this.updatePathCommands();
+  this.setCommands();
 
 };
 
@@ -55,6 +55,7 @@ Axis.prototype.setCommands = function(){
     {x:this.renderOrigin.x,y:this.renderOrigin.y,z:this.renderOrigin.z}, // start at 1st point
     this.parametrize( this.renderOrigin, this.renderFront, this.t),
   ];
+  this.updatePathCommands();
 }
 
 // ----- update ----- //
@@ -109,12 +110,18 @@ Axis.prototype.render = function( ctx, renderer ) {
 };
 
 Axis.prototype.renderPath = function( ctx, renderer ) {
-  var elem = this.getRenderElement( ctx, renderer );
-  var isClosed = true
-  var color = this.color;
-  renderer.renderPath( ctx, elem, this.pathCommands, isClosed );
-  renderer.stroke( ctx, elem, true, color, this.stroke );
-  renderer.end( ctx, elem );
+  var matrix = ctx.getTransform()
+  //ctx.save();
+  var p = this.getPoints();
+  ctx.beginPath()
+  ctx.moveTo(p[0].x, p[0].y)
+  ctx.lineTo(p[1].x, p[1].y)
+  if (!this.scaleZoom) {ctx.resetTransform();}
+  ctx.strokeStyle = this.color
+  ctx.lineWidth = this.stroke
+  ctx.stroke()
+  ctx.setTransform(matrix);
+  //ctx.restore()
 };
 
 Axis.prototype.getRenderElement = function( ctx, renderer ) {

@@ -144,7 +144,14 @@ Illustration.prototype.setSizeCanvas = function( width, height ) {
 Illustration.prototype.renderGraphCanvas = function( item ) {
   item = item || this;
   this.prerenderCanvas();
+  //if (item) == this{
+    //split flatgraph in half, render axis if needed, then yah
+  // this.flatGraph.forEach( function( item ) {
+  //   item.render( ctx, CanvasRenderer );
+  // } );
+  //} else {
   Anchor.prototype.renderGraphCanvas.call( item, this.ctx );
+  //}
   this.postrenderCanvas();
 };
 
